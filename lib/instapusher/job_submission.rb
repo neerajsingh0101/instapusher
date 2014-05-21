@@ -35,7 +35,10 @@ module Instapusher
       pre_submission_feedback_to_user if debug
 
       response = Net::HTTP.post_form URI.parse(url_to_submit_job), options
-      @response_body  = ::JSON.parse(response.body)
+      raw_body = response.body
+      puts "raw_body: #{raw_body}" if debug
+
+      @response_body  = ::JSON.parse(raw_body)
       puts "response_body: #{response_body.inspect}" if debug
       @job_status_url = response_body['status_url']
     end

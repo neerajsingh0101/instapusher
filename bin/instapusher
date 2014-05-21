@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/instapusher'
+
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+
+  opts.on("-v", "--version", "show version") do |v|
+    options[:version] = v
+  end
+
+  opts.on("--quick", "Run quickly") do |v|
+    options[:quick] = v
+  end
+
+  opts.on("--local", "Run locally") do |v|
+    options[:local] = v
+  end
+
+  opts.on("--debug", "Show debug messages") do |v|
+    options[:debug] = v
+  end
+
+  opts.on("--api-key", "Setup Instapusher api key") do |v|
+    options[:api_key] = v
+  end
+
+end.parse!
+
+if options[:version]
+  puts Instapusher::VERSION
+
+elsif options[:api_key]
+  Instapusher::Configuration.ask_for_and_write_api_key
+
+else
+  Instapusher::Commands.new(options).deploy
+end

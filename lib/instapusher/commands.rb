@@ -26,7 +26,7 @@ module Instapusher
 
       if job_submission.success?
         job_submission.feedback_to_user
-        TagTheRelease.new(branch_name, debug).tagit if (production? || staging?)
+        #TagTheRelease.new(branch_name, debug).tagit if (production? || staging?)
       else
         puts job_submission.error_message
       end
@@ -47,13 +47,11 @@ module Instapusher
 
     def verify_api_key
       @api_key = ENV['API_KEY'] || Instapusher::Configuration.api_key(debug) || ""
+      puts "api_key is #{@api_key}" if debug
 
       if @api_key.to_s.length == 0
         puts ''
         abort "No instapusher API key was found. Please execute instapusher --api-key to setup instapusher API key."
-
-      elsif debug
-        puts "api_key is #{@api_key}"
       end
     end
 

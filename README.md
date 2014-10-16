@@ -43,8 +43,6 @@ heroku run rake jobs:work --app my-awesome-app-42-add-devise-authentication-ip
 
 ### Deleting old instances
 
-# Deleting old instances
-
 Heroku allows only 100 instances. Once 100 applications have been created by instapusher account then heroku does not create any new application and instapusher starts failing.
 
 In order to delete old instances visit the project project and then "More" > "Reached limit".

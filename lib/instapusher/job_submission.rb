@@ -46,7 +46,9 @@ module Instapusher
     def url_to_submit_job
       @url ||= begin
           hostname =  if options[:local]
-                        "localhost:3000" 
+                        "localhost:3000"
+                      elsif options[:staging]
+                        "instapusher.net"
                       else
                         ENV['INSTAPUSHER_HOST'] || DEFAULT_HOSTNAME
                       end

@@ -11,19 +11,19 @@ OptionParser.new do |opts|
     options[:version] = v
   end
 
-  opts.on("--quick", "Run quickly") do |v|
-    options[:quick] = v
+  opts.on("--local", "Hit localhost:3000") do |v|
+    options[:local] = v
   end
 
-  opts.on("--local", "Run locally") do |v|
-    options[:local] = v
+  opts.on("--staging", "Hit instapusher.net") do |v|
+    options[:staging] = v
   end
 
   opts.on("--debug", "Show debug messages") do |v|
     options[:debug] = v
   end
 
-  opts.on("--api-key", "Setup Instapusher api key") do |v|
+  opts.on("--api-key", "Set Instapusher api key") do |v|
     options[:api_key] = v
   end
 

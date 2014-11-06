@@ -52,8 +52,17 @@ module Instapusher
                       else
                         ENV['INSTAPUSHER_HOST'] || DEFAULT_HOSTNAME
                       end
-          "http://#{hostname}/api/v1/jobs.json"
+          if use_ssl?
+            "https://#{hostname}/api/v1/jobs.json"
+          else
+            "http://#{hostname}/api/v1/jobs.json"
+          end
       end
     end
+
+    def use_ssl?
+      !(ENV['INSTAPUSHER_HOST'] || options[:local])
+    end
+
   end
 end

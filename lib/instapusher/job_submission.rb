@@ -36,10 +36,10 @@ module Instapusher
 
       response = Net::HTTP.post_form URI.parse(url_to_submit_job), options
       raw_body = response.body
-      puts "raw_body: #{raw_body}" if debug
+      puts "response raw body: #{raw_body}" if debug
 
       @response_body  = ::JSON.parse(raw_body)
-      puts "response_body: #{response_body.inspect}" if debug
+      puts "JSON parsed response raw body: #{response_body.inspect}" if debug
       @job_status_url = response_body['status_url']
     end
 

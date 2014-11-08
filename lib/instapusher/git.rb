@@ -1,7 +1,7 @@
 module Instapusher
 
   class RepoOwnerIdentifierService
-    
+
     attr_reader :string
 
     def initialize string
@@ -32,7 +32,7 @@ module Instapusher
     def current_branch
       result = %x{git branch}.split("\n")
       if result.empty?
-        raise "It seems your app is not a git repo"
+        raise "It seems your app is not a git repository. Please check."
       else
         result.select { |b| b =~ /^\*/ }.first.split(" ").last.strip
       end

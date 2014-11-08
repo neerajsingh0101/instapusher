@@ -7,9 +7,10 @@ module Instapusher
 
     attr_reader :debug, :api_key, :branch_name, :project_name, :staging
 
-    def initialize init_options = {}
+    def initialize init_options
       @debug = init_options[:debug]
       @staging = init_options[:staging]
+      @local = init_options[:local]
 
       git          = Git.new
       @branch_name  = init_options[:project_name] || ENV['INSTAPUSHER_BRANCH'] || git.current_branch
@@ -36,6 +37,7 @@ module Instapusher
     def options
       @options ||= begin
         { project: project_name,
+          local: @local,
           branch:  branch_name,
           owner: Git.new.repo_owner,
           version: VERSION,

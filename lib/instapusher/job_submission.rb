@@ -8,6 +8,8 @@ module Instapusher
     def initialize debug, options
       @debug = debug
       @options = options
+
+      puts "options is #{options.inspect}"
     end
 
     def success?
@@ -52,11 +54,8 @@ module Instapusher
                       else
                         ENV['INSTAPUSHER_HOST'] || DEFAULT_HOSTNAME
                       end
-          if use_ssl?
-            "https://#{hostname}/api/v1/jobs.json"
-          else
-            "http://#{hostname}/api/v1/jobs.json"
-          end
+          protocol = use_ssl? ? 'https' : 'http'
+          "#{protocol}://#{hostname}/api/v1/jobs.json"
       end
     end
 

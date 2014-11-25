@@ -44,11 +44,10 @@ module Instapusher
           staging: staging,
           api_key: api_key }
       end
+    end
 
-      def repo_owner
-        Git.new.repo_owner
-      end
-
+    def repo_owner
+      Git.new.repo_owner
     end
 
     def verify_api_key

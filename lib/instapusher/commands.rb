@@ -13,8 +13,8 @@ module Instapusher
       @local = init_options[:local]
 
       git          = Git.new
-      @branch_name  = init_options[:project_name] || ENV['INSTAPUSHER_BRANCH'] || git.current_branch
-      @project_name = init_options[:branch_name] || ENV['INSTAPUSHER_PROJECT'] || git.project_name
+      @branch_name  = ENV['INSTAPUSHER_BRANCH'] || git.current_branch
+      @project_name = ENV['INSTAPUSHER_PROJECT'] || git.project_name
     end
 
     def deploy

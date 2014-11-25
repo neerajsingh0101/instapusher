@@ -45,11 +45,10 @@ module Instapusher
     end
 
     def repo_owner
-      Git.new.repo_owner
+      git.repo_owner
     end
 
     def verify_api_key
-
       if @api_key.to_s.length == 0
         puts ''
         abort "No instapusher API key was found. Please execute instapusher --api-key to setup instapusher API key."

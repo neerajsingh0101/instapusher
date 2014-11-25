@@ -9,7 +9,7 @@ module Instapusher
       @debug = debug
       @options = options
 
-      puts "options is #{options.inspect}"
+      log "options is #{options.inspect}"
     end
 
     def success?
@@ -17,9 +17,9 @@ module Instapusher
     end
 
     def pre_submission_feedback_to_user
-      puts "url to hit: #{url_to_submit_job.inspect}"
-      puts "options being passed to the url: #{options.inspect}"
-      puts "connecting to #{url_to_submit_job} to send data"
+      log "url to hit: #{url_to_submit_job.inspect}"
+      log "options being passed to the url: #{options.inspect}"
+      log "connecting to #{url_to_submit_job} to send data"
     end
 
     def feedback_to_user
@@ -34,14 +34,14 @@ module Instapusher
     end
 
     def submit_the_job
-      pre_submission_feedback_to_user if debug
+      pre_submission_feedback_to_user
 
       response = Net::HTTP.post_form URI.parse(url_to_submit_job), options
       raw_body = response.body
-      puts "response raw body: #{raw_body}" if debug
+      log "response raw body: #{raw_body}"
 
       @response_body  = ::JSON.parse(raw_body)
-      puts "JSON parsed response raw body: #{response_body.inspect}" if debug
+      log "JSON parsed response raw body: #{response_body.inspect}"
       @job_status_url = response_body['status_url']
     end
 
@@ -61,6 +61,10 @@ module Instapusher
 
     def use_ssl?
       !(ENV['INSTAPUSHER_HOST'] || options[:local])
+    end
+
+    def log msg
+      puts msg if debug
     end
 
   end

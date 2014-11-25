@@ -21,7 +21,7 @@ module Instapusher
       verify_api_key
       #SpecialInstructionForProduction.new.run if production?
 
-      job_submission = JobSubmission.new(debug, options)
+      job_submission = JobSubmission.new(debug, job_submission_parameters)
       job_submission.submit_the_job
 
       if job_submission.success?
@@ -34,8 +34,7 @@ module Instapusher
 
     private
 
-    def options
-      @options ||= begin
+    def job_submission_parameters
         { project: project_name,
           local: local,
           branch:  branch_name,
@@ -43,7 +42,6 @@ module Instapusher
           version: VERSION,
           staging: staging,
           api_key: api_key }
-      end
     end
 
     def repo_owner

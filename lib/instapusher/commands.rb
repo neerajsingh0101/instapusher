@@ -15,6 +15,8 @@ module Instapusher
       git          = Git.new
       @branch_name  = ENV['INSTAPUSHER_BRANCH'] || git.current_branch
       @project_name = ENV['INSTAPUSHER_PROJECT'] || git.project_name
+
+      detect_api_key
     end
 
     def deploy
@@ -49,8 +51,6 @@ module Instapusher
     end
 
     def verify_api_key
-      detect_api_key
-      log "api_key is #{@api_key}"
 
       if @api_key.to_s.length == 0
         puts ''
@@ -60,6 +60,7 @@ module Instapusher
 
     def detect_api_key
       @api_key = ENV['API_KEY'] || Instapusher::Configuration.api_key(debug) || ""
+      log "api_key is #{@api_key}"
     end
 
     def production?

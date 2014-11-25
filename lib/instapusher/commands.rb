@@ -11,10 +11,8 @@ module Instapusher
       @debug = init_options[:debug]
       @staging = init_options[:staging]
       @local = init_options[:local]
-
-      git          = Git.new
-      @branch_name  = ENV['INSTAPUSHER_BRANCH'] || git.current_branch
-      @project_name = ENV['INSTAPUSHER_PROJECT'] || git.project_name
+      @branch_name  = get_branch_name
+      @project_name = get_project_name
 
       detect_api_key
     end
@@ -73,6 +71,18 @@ module Instapusher
 
     def log msg
       puts msg if debug
+    end
+
+    def get_branch_name
+      ENV['INSTAPUSHER_BRANCH'] || git.current_branch
+    end
+
+    def get_project_name
+      ENV['INSTAPUSHER_PROJECT'] || git.project_name
+    end
+
+    def git
+      @_git ||= Git.new
     end
 
   end

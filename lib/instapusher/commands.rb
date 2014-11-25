@@ -41,7 +41,7 @@ module Instapusher
           branch:  branch_name,
           owner: Git.new.repo_owner,
           version: VERSION,
-          staging: @staging,
+          staging: staging,
           api_key: api_key }
       end
     end

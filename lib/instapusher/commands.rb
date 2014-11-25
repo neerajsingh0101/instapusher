@@ -39,11 +39,16 @@ module Instapusher
         { project: project_name,
           local: @local,
           branch:  branch_name,
-          owner: Git.new.repo_owner,
+          owner: repo_owner,
           version: VERSION,
           staging: staging,
           api_key: api_key }
       end
+
+      def repo_owner
+        Git.new.repo_owner
+      end
+
     end
 
     def verify_api_key

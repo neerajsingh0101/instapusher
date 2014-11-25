@@ -49,13 +49,17 @@ module Instapusher
     end
 
     def verify_api_key
-      @api_key = ENV['API_KEY'] || Instapusher::Configuration.api_key(debug) || ""
+      detect_api_key
       puts "api_key is #{@api_key}" if debug
 
       if @api_key.to_s.length == 0
         puts ''
         abort "No instapusher API key was found. Please execute instapusher --api-key to setup instapusher API key."
       end
+    end
+
+    def detect_api_key
+      @api_key = ENV['API_KEY'] || Instapusher::Configuration.api_key(debug) || ""
     end
 
     def production?

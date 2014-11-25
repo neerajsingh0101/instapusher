@@ -5,7 +5,7 @@ require 'uri'
 module Instapusher
   class Commands
 
-    attr_reader :debug, :api_key, :branch_name, :project_name, :staging
+    attr_reader :debug, :api_key, :branch_name, :project_name, :staging, :local
 
     def initialize init_options
       @debug = init_options[:debug]
@@ -37,7 +37,7 @@ module Instapusher
     def options
       @options ||= begin
         { project: project_name,
-          local: @local,
+          local: local,
           branch:  branch_name,
           owner: repo_owner,
           version: VERSION,

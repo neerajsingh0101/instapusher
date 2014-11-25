@@ -50,7 +50,7 @@ module Instapusher
 
     def verify_api_key
       detect_api_key
-      puts "api_key is #{@api_key}" if debug
+      log "api_key is #{@api_key}"
 
       if @api_key.to_s.length == 0
         puts ''
@@ -68,6 +68,10 @@ module Instapusher
 
     def staging?
       branch_name.intern == :staging
+    end
+
+    def log msg
+      puts msg if debug
     end
 
   end
